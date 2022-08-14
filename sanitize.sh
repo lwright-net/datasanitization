@@ -21,6 +21,6 @@ read -p "You selected $disktokill. Is this correct? (y/n)" yn
      esac
     else
      printf "$disktokill does not exist in /dev/ \n"
-     break;;
     fi
+break;;
 done
