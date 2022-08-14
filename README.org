@@ -18,18 +18,26 @@ In this script I will depend on the following to be installed:
  + the built-in =linux= utils
    + =lsblk= (list block devices)
  + the =bash= shell
-* Find out which disk(s) to sanitize
-First task is to find out which disk(s) need to be sanitized.
+* Find out which disk to sanitize
+First task is to find out which disk needs to be sanitized.
 Ideally this will be as many as you like with the limiting factor being hardware this script is ran on.
 To make it a little easier for the operator to figure out which disk is which I will call =lsblk=.
 #+BEGIN_SRC bash :shebang "#!/bin/bash"
-printf "This script is potentially dangerous! \n It WILL destroy data and make said data unrecoverable! \n \n"
+printf "---------------"
+printf "This script is potentially dangerous! \nIt WILL destroy data and make said data unrecoverable! \n \n"
 printf "Please choose disk to sanitize.\nBe mindful of which disk the OS is written to! \n"
+printf "---------------"
 lsblk
-read -p "Enter the disk name as shown in the chart above: " disktokill
-printf "You entered $disktokill. Is this the correct disk? \n:"
+read -p "Enter the disk name *EXACTLY* as shown in the chart above: " disktokill
+read -p "You entered $disktokill. Is this the correct disk? (y/n)\n" yn
 #+END_SRC
 * First pass write zeros
+Now that we know what disk to kill we will need to do a pass of writing zeros in every location.
+#+BEGIN_SRC bash
+case $yn in
+    [Yy]* ) sudo dd if=/dev/zero of=/dev/$disktokill bs=64K status=progress ;
+    [Nn]* ) printf "Aborting sanitization!\n"
+#+END_SRC
 * Second pass write ones
 We can use the =tr= (translate) command to turn a zero from =/dev/zero= to a one.
 With our zeros turned to ones we can then write them to the disk in mostly the same way.
