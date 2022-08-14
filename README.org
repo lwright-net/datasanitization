@@ -1,0 +1,36 @@
+#+title: Script for sanitizing disks
+#+author: Lane Wright
+#+PROPERTY: header-args :tangle sanitize.sh
+#+auto_tangle: t
+
+* About this script
+I came across a need at work to sanitize disks from decommissioned laptops with potentially sensitive data on them.
+This ispired me to write my first 'proper' script, that does a real task that would be needed in a business environment.
+Goals for this script are:
+ + follow NIST guidelines laid out in document 800-88 to ensure no data can be recovered
+ + provide some sort of logging functionality that is printable on paper records
+ + do this as fast as possible (some of these disks can be large)
+ + be simple enough operators unfamiliar with Linux can use this script
+In this script I will depend on the following to be installed:
+ + the GNU =coreutils=
+   + =dd= (byte-level utility for copying data)
+   + =tr= (translate)
+ + the built-in =linux= utils
+   + =lsblk= (list block devices)
+ + the =bash= shell
+* Find out which disk(s) to sanitize
+First task is to find out which disk(s) need to be sanitized.
+Ideally this will be as many as you like with the limiting factor being hardware this script is ran on.
+To make it a little easier for the operator to figure out which disk is which I will call =lsblk=.
+#+BEGIN_SRC bash :shebang "#!/bin/bash"
+printf "This script is potentially dangerous! \n It WILL destroy data and make said data unrecoverable! \n \n"
+printf "Please choose disk to sanitize.\nBe mindful of which disk the OS is written to! \n"
+lsblk
+read -p "Enter the disk name as shown in the chart above: " disktokill
+printf "You entered $disktokill. Is this the correct disk? \n:"
+#+END_SRC
+* First pass write zeros
+* Second pass write ones
+We can use the =tr= (translate) command to turn a zero from =/dev/zero= to a one.
+With our zeros turned to ones we can then write them to the disk in mostly the same way.
+* Third pass write random data
