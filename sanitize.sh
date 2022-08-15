@@ -7,7 +7,7 @@ printf "Please choose disk to sanitize.\nBe mindful of which disk the OS is writ
 lsblk
 read -p "Enter the disk name *EXACTLY* as shown in the chart above: " disktokill
 }
-finddisktokill()
+finddisktokill
 
 while true; do
 read -p "You selected $disktokill. Is this correct? (y/n)" yn
@@ -28,5 +28,4 @@ read -p "You selected $disktokill. Is this correct? (y/n)" yn
      printf "$disktokill does not exist in /dev/ \n"
      finddisktokill
     fi
-break;;
 done

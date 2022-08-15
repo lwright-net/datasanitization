@@ -31,7 +31,7 @@ printf "Please choose disk to sanitize.\nBe mindful of which disk the OS is writ
 lsblk
 read -p "Enter the disk name *EXACTLY* as shown in the chart above: " disktokill
 }
-finddisktokill()
+finddisktokill
 #+END_SRC
 * First pass write zeros
 Now that we know what disk to kill we will need to do a pass of writing zeros in every location.
@@ -55,7 +55,6 @@ read -p "You selected $disktokill. Is this correct? (y/n)" yn
      printf "$disktokill does not exist in /dev/ \n"
      finddisktokill
     fi
-break;;
 done
 #+END_SRC
 * Second pass write ones
