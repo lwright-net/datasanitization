@@ -18,10 +18,62 @@ In this script I will depend on the following to be installed:
  + the built-in =linux= utils
    + =lsblk= (list block devices)
  + the =bash= shell
+
+* First pass write zeros
+In this block I define the =writezeros= function.
+
+To write all zeros to disk I use the =dd= command, a low level copy command.
+It works at the byte level rather than the file level.
+The =bs= parameter is short for byte size. In this case it defines how big of a chunk of 0s we copy at once.
+Some tuning can be done on a per drive basis but this will give pretty good perfomance for most drives.
+See the =man= page for more info about dd.
+
+#+BEGIN_SRC bash
+writezeros() {
+printf "Writing zeros\n"
+sudo dd if=/dev/zero of=/dev/$1 bs=64K status=progress
+}
+#+END_SRC
+
+* Second pass write ones
+In this block I define the writeones function.
+
+We can use the =tr= (translate) command to turn a zero from =/dev/zero= to a one.
+With our zeros turned to ones we can then write them to the disk in mostly the same way.
+
+#+BEGIN_SRC bash
+writeones() {
+printf "Writing ones\n"
+tr '\0' '\377' < /dev/zero | sudo dd of=/dev/$1 bs=64K status=progress
+}
+#+END_SRC
+
+Notice there is no =if= parameter defined for =dd=.
+This is because we are using =stdin= as an implied input by use of the pipe.
+The values used in =tr= are octal values.
+The < redirects the content of =/dev/zero= as =stdin= for =tr=
+
+* Third pass write random data
+In this block I define the =writerandom= function.
+
+Writing random data is just as easy as writing zeros, no bash-fu needed.
+This is because the Linux kernel provides =device= files for producing random data, =/dev/urandom= and =/dev/random=.
+Technically =/dev/urandom= is psuedo-random based off a seed from the same entropy pool =/dev/random= gets it's data,
+but I will refer you to the =man= page for more info.
+
+#+BEGIN_SRC bash
+writerandom() {
+printf "Writing random data\n"
+sudo dd if=/dev/urandom of=/dev/$1 bs=64K status=progress
+}
+#+END_SRC
+
 * Find out which disk to sanitize
 First task is to find out which disk needs to be sanitized.
 Ideally this will be as many as you like with the limiting factor being hardware this script is ran on.
 To make it a little easier for the operator to figure out which disk is which I will call =lsblk=.
+I also define the =finddisktokill= function.
+
 #+BEGIN_SRC bash :shebang "#!/bin/bash"
 printf "===============\n"
 printf "This script is potentially dangerous! \nIt WILL destroy data and make said data unrecoverable! \n"
@@ -31,18 +83,30 @@ printf "Please choose disk to sanitize.\nBe mindful of which disk the OS is writ
 lsblk
 read -p "Enter the disk name *EXACTLY* as shown in the chart above: " disktokill
 }
+
 finddisktokill
 #+END_SRC
-* First pass write zeros
-Now that we know what disk to kill we will need to do a pass of writing zeros in every location.
+
+* Double check that we have the correct disk
+Now that we know what disk to kill let's make sure the operator is sure they chose the correct disk.
+
+This block of code utilizes the =test= function of bash. The =-b= option is an option flag that checks block file types.
+(Disks are block files (remember for Linux everything is a file))
+Then we ask twice if the selected disk is correct.
+With two operator confirmations we call the writezeros function.
+If we get anything other than two confirmations, start over or exit.
+
 #+BEGIN_SRC bash
 while true; do
-read -p "You selected $disktokill. Is this correct? (y/n)" yn
     if [ -b "/dev/$disktokill" ]; then
+     read -p "You selected $disktokill. Is this correct? (y/n)" yn
      case $yn in
          [Yy]* ) read -p "Are you sure $disktokill is correct? (y/n)" yn2
                  case $yn2 in
-                     [Yy]* ) sudo dd if=/dev/zero of=/dev/$disktokill bs=64K status=progress ;
+                     [Yy]* ) writezeros $disktokill;
+                             writeones $disktokill;
+                             writerandom $disktokill;
+                             printf "Sanitization completed!\n"
                              break;;
                      ,* ) printf "Aborting sanitization!\n";
                           break;;
@@ -57,7 +121,3 @@ read -p "You selected $disktokill. Is this correct? (y/n)" yn
     fi
 done
 #+END_SRC
-* Second pass write ones
-We can use the =tr= (translate) command to turn a zero from =/dev/zero= to a one.
-With our zeros turned to ones we can then write them to the disk in mostly the same way.
-* Third pass write random data
