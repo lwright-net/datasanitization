@@ -44,7 +44,7 @@ while true; do
               break;;
      esac
     else
-     printf "\n$disktokill does not exist in /dev/ \n"
+     printf "\n $disktokill does not exist in /dev/ \n"
      finddisktokill
     fi
 done
