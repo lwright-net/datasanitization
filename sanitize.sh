@@ -49,8 +49,8 @@ while true; do
                      [Yy]* ) writezeros $disktokill;
                              writeones $disktokill;
                              writerandom $disktokill;
-                             log;
-                             logtopdf;
+                             log $disktokill;
+                             logtopdf $disktokill;
                              printf "\nSanitization completed!\n"
                              break;;
                      * ) printf "\nAborting sanitization!\n";
