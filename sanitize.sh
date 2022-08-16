@@ -20,9 +20,9 @@ sudo hexdump /dev/$1 -Cs $((RANDOM%5)) -n 128
 log() {
     cat \
     <(date) \
-    <(printf "The following disk has been sanitized\nIncluded is pertinent information\nand a random selection of bytes read from the disk\nafter sanitization\n") \
+    <(printf "The following disk has been sanitized.\nIncluded is pertinent information,\nand a random selection of bytes read from the disk\nafter sanitization.\n\n") \
     <(lsblk --nodeps -o name,model,serial,uuid,size /dev/$1) \
-    <(verify) > latestsanitization.log
+    <(verify $1) > latestsanitization.log
 }
 logtopdf() {
 cupsfilter latestsanitization.log > $(date +"%b%d%Y%H%M").pdf
