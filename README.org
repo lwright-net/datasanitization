@@ -18,8 +18,12 @@ In this script I will depend on the following to be installed:
  + the built-in =linux= utils
    + =lsblk= (list block devices)
  + the =bash= shell
+ + =cups= the common Unix printing system
+   + =cupsfilter= to convert from plain text to pdf
+All of these software dependencies should be preinstalled on a standard installation of Ubuntu Desktop
+I have tested this script on Ubuntu Desktop 22.04.1 LTS
 
-* First pass write zeros
+* Write zeros
 In this block I define the =writezeros= function.
 
 To write all zeros to disk I use the =dd= command, a low level copy command.
@@ -35,7 +39,7 @@ sudo dd if=/dev/zero of=/dev/$1 bs=64K status=progress
 }
 #+END_SRC
 
-* Second pass write ones
+* Write ones
 In this block I define the writeones function.
 
 We can use the =tr= (translate) command to turn a zero from =/dev/zero= to a one.
@@ -53,7 +57,7 @@ This is because we are using =stdin= as an implied input by use of the pipe.
 The values used in =tr= are octal values.
 The < redirects the content of =/dev/zero= as =stdin= for =tr=
 
-* Third pass write random data
+* Write random data
 In this block I define the =writerandom= function.
 
 Writing random data is just as easy as writing zeros, no bash-fu needed.
@@ -65,6 +69,31 @@ but I will refer you to the =man= page for more info.
 writerandom() {
 printf "\nWriting random data\n"
 sudo dd if=/dev/urandom of=/dev/$1 bs=64K status=progress
+}
+#+END_SRC
+
+* Verify random data is written
+In this block I define the function =verify= to check if there is random data actually on the disk
+
+#+BEGIN_SRC bash
+verify() {
+sudo hexdump /dev/$1 -Cs $((RANDOM%5)) -n 128
+}
+#+END_SRC
+
+* Create a log file and convert to PDF
+In this block I define =log= and =logtopdf= for purposes of keeping a record of disks that have been sanitized.
+
+#+BEGIN_SRC bash
+log() {
+    cat \
+    <(date) \
+    <(printf "The following disk has been sanitized\nIncluded is pertinent information\nand a random selection of bytes read from the disk\nafter sanitization\n") \
+    <(lsblk --nodeps -o name,model,serial,uuid,size /dev/$1) \
+    <(verify) > latestsanitization.log
+}
+logtopdf() {
+cupsfilter latestsanitization.log > $(date +"%b%d%Y%H%M").pdf
 }
 #+END_SRC
 
@@ -80,14 +109,14 @@ printf "This script is potentially dangerous! \nIt WILL destroy data and make sa
 printf "===============\n"
 finddisktokill() {
 printf "Please choose disk to sanitize.\nBe mindful of which disk the OS is written to! \n\n"
-lsblk
-read -p "\nEnter the disk name *EXACTLY* as shown in the chart above: " disktokill
+lsblk -o name,size,type,mountpoint,serial
+read -p "\n Enter the disk name *EXACTLY* as shown in the chart above: " disktokill
 }
 
 finddisktokill
 #+END_SRC
 
-* Double check that we have the correct disk
+* Double check that we have the correct disk and sanitize
 Now that we know what disk to kill let's make sure the operator is sure they chose the correct disk.
 
 This block of code utilizes the =test= function of bash. The =-b= option is an option flag that checks block file types.
@@ -106,6 +135,8 @@ while true; do
                      [Yy]* ) writezeros $disktokill;
                              writeones $disktokill;
                              writerandom $disktokill;
+                             log;
+                             logtopdf;
                              printf "\nSanitization completed!\n"
                              break;;
                      ,* ) printf "\nAborting sanitization!\n";
@@ -121,3 +152,4 @@ while true; do
     fi
 done
 #+END_SRC
+
