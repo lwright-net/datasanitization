@@ -14,7 +14,8 @@ sudo dd if=/dev/urandom of=/dev/$1 bs=64K status=progress
 }
 
 verify() {
-sudo hexdump /dev/$1 -Cs $((RANDOM%5)) -n 128
+sizeofdisk=$(lsblk -bno size /dev/$1)
+sudo hexdump /dev/$1 -Cs $((RANDOM%$sizeofdisk)) -n 256
 }
 
 log() {
@@ -22,7 +23,7 @@ log() {
     <(date) \
     <(printf "The following disk has been sanitized.\nIncluded is pertinent information,\nand a random selection of bytes read from the disk\nafter sanitization.\n\n") \
     <(lsblk --nodeps -o name,model,serial,uuid,size /dev/$1) \
-    <(printf "\n")
+    <(printf "\n") \
     <(verify $1) > latestsanitization.log
 }
 logtopdf() {
@@ -51,7 +52,7 @@ while true; do
                              writeones $disktokill;
                              writerandom $disktokill;
                              log $disktokill;
-                             logtopdf $disktokill;
+                             logtopdf;
                              printf "\nSanitization completed!\n"
                              break;;
                      * ) printf "\nAborting sanitization!\n";
