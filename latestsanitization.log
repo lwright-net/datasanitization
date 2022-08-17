@@ -1,0 +1,26 @@
+Wed Aug 17 06:59:08 AM EDT 2022
+The following disk has been sanitized.
+Included is pertinent information,
+and a random selection of bytes read from the disk
+after sanitization.
+
+NAME MODEL SERIAL UUID SIZE
+vdb                      5G
+
+00003052  39 f8 c5 35 2c 0b cb 05  cb 50 74 9c 85 0a 51 8b  |9..5,....Pt...Q.|
+00003062  db bd c7 2c d7 11 f7 9e  4a b3 9e 9d c3 6c da cc  |...,....J....l..|
+00003072  bb 29 dd 58 6d 0c ba 44  07 f9 b8 bc de 4a 4a 9f  |.).Xm..D.....JJ.|
+00003082  7a c1 38 94 7e 0d df 9e  a6 bd 89 6c fd eb 84 6b  |z.8.~......l...k|
+00003092  e0 fa 15 02 90 b2 c0 8a  2d 8d 1f af 97 66 f0 e9  |........-....f..|
+000030a2  3c 04 68 ac b6 5c 9d 9a  d4 c4 eb fa 8a 27 b6 17  |<.h..\.......'..|
+000030b2  ef 29 50 28 c6 fd c9 c4  d4 77 e2 00 b3 57 47 46  |.)P(.....w...WGF|
+000030c2  6f a2 04 a3 fa c3 c4 22  2b c3 c1 20 2d c9 f9 b4  |o......"+.. -...|
+000030d2  25 84 2f 1a b7 21 fc d8  c2 35 4e 4f 0f aa a1 04  |%./..!...5NO....|
+000030e2  e8 56 3d bc 12 4e 5d 86  19 1c a1 8b a7 3e 26 00  |.V=..N]......>&.|
+000030f2  80 f9 52 5c 18 60 15 1c  80 fb 4e 3e d0 55 93 c3  |..R\.`....N>.U..|
+00003102  98 0e f2 9f e6 0c f8 b3  7d 59 97 39 59 f7 14 e6  |........}Y.9Y...|
+00003112  e7 e1 7c 7a dd 3c 77 e4  70 3e 09 38 b9 7e fe 95  |..|z.<w.p>.8.~..|
+00003122  a2 19 04 d4 14 39 f0 36  d0 67 3c 00 58 d3 1c f6  |.....9.6.g<.X...|
+00003132  82 85 96 68 ea 64 21 fc  89 1f 06 d7 c3 36 9c 7d  |...h.d!......6.}|
+00003142  44 f2 cb bd 05 25 d4 ae  f5 2a 09 5e 74 a1 ef 17  |D....%...*.^t...|
+00003152

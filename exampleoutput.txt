@@ -1,0 +1,33 @@
+===============
+This script is potentially dangerous! 
+It WILL destroy data and make said data unrecoverable! 
+===============
+Please choose disk to sanitize.
+Be mindful of which disk the OS is written to! 
+
+NAME     SIZE TYPE MOUNTPOINT                                     SERIAL
+loop0     62M loop /snap/core20/1587                              
+loop1  163.3M loop /snap/firefox/1635                             
+loop2      4K loop /snap/bare/5                                   
+loop3   91.7M loop /snap/gtk-common-themes/1535                   
+loop4  400.8M loop /snap/gnome-3-38-2004/112                      
+loop5   45.9M loop /snap/snap-store/582                           
+loop6     47M loop /snap/snapd/16292                              
+loop7    284K loop /snap/snapd-desktop-integration/14             
+loop8     62M loop /snap/core20/1593                              
+loop9  163.3M loop /snap/firefox/1670                             
+sr0      3.6G rom  /media/ubuntudiskkill/Ubuntu 22.04.1 LTS amd64 QM00003
+vda       15G disk                                                
+├─vda1     1M part                                                
+├─vda2   513M part /boot/efi                                      
+└─vda3  14.5G part /                                              
+vdb        5G disk                                                
+vdc        5G disk                                                
+
+Writing zeros
+
+Writing ones
+
+Writing random data
+
+Sanitization completed!
