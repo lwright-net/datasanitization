@@ -5,24 +5,36 @@ It WILL destroy data and make said data unrecoverable!
 Please choose disk to sanitize.
 Be mindful of which disk the OS is written to! 
 
-NAME     SIZE TYPE MOUNTPOINT                                     SERIAL
-loop0     62M loop /snap/core20/1587                              
-loop1  163.3M loop /snap/firefox/1635                             
-loop2      4K loop /snap/bare/5                                   
-loop3   91.7M loop /snap/gtk-common-themes/1535                   
-loop4  400.8M loop /snap/gnome-3-38-2004/112                      
-loop5   45.9M loop /snap/snap-store/582                           
-loop6     47M loop /snap/snapd/16292                              
-loop7    284K loop /snap/snapd-desktop-integration/14             
-loop8     62M loop /snap/core20/1593                              
-loop9  163.3M loop /snap/firefox/1670                             
-sr0      3.6G rom  /media/ubuntudiskkill/Ubuntu 22.04.1 LTS amd64 QM00003
-vda       15G disk                                                
-├─vda1     1M part                                                
-├─vda2   513M part /boot/efi                                      
-└─vda3  14.5G part /                                              
-vdb        5G disk                                                
-vdc        5G disk                                                
+NAME                            SIZE TYPE MOUNTPOINT SERIAL
+sda                           115.4G disk            071913D74552DA92
+nvme0n1                       465.8G disk            2038FB802822
+├─nvme0n1p1                    1007K part            
+├─nvme0n1p2                     512M part /boot/efi  
+└─nvme0n1p3                   465.3G part            
+  ├─pve-swap                      8G lvm  [SWAP]     
+  ├─pve-root                     96G lvm  /          
+  ├─pve-data_tmeta              3.5G lvm             
+  │ └─pve-data-tpool          338.4G lvm             
+  │   ├─pve-data              338.4G lvm             
+  │   ├─pve-vm--1000--disk--0     4M lvm             
+  │   ├─pve-vm--1000--disk--1   145G lvm             
+  │   ├─pve-vm--100--disk--0      4M lvm             
+  │   ├─pve-vm--100--disk--1     15G lvm             
+  │   ├─pve-vm--101--disk--0      6G lvm             
+  │   ├─pve-vm--103--disk--0     15G lvm             
+  │   ├─pve-vm--103--disk--1      5G lvm             
+  │   └─pve-vm--103--disk--2      5G lvm             
+  └─pve-data_tdata            338.4G lvm             
+    └─pve-data-tpool          338.4G lvm             
+      ├─pve-data              338.4G lvm             
+      ├─pve-vm--1000--disk--0     4M lvm             
+      ├─pve-vm--1000--disk--1   145G lvm             
+      ├─pve-vm--100--disk--0      4M lvm             
+      ├─pve-vm--100--disk--1     15G lvm             
+      ├─pve-vm--101--disk--0      6G lvm             
+      ├─pve-vm--103--disk--0     15G lvm             
+      ├─pve-vm--103--disk--1      5G lvm             
+      └─pve-vm--103--disk--2      5G lvm             
 
 Writing zeros
 

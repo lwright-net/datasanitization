@@ -1,26 +1,26 @@
-Wed Aug 17 06:59:08 AM EDT 2022
+Wed 17 Aug 2022 08:50:01 PM EDT
 The following disk has been sanitized.
 Included is pertinent information,
 and a random selection of bytes read from the disk
 after sanitization.
 
-NAME MODEL SERIAL UUID SIZE
-vdb                      5G
+NAME MODEL        SERIAL           UUID   SIZE
+sda  USB_DISK_3.0 071913D74552DA92      115.4G
 
-00003052  39 f8 c5 35 2c 0b cb 05  cb 50 74 9c 85 0a 51 8b  |9..5,....Pt...Q.|
-00003062  db bd c7 2c d7 11 f7 9e  4a b3 9e 9d c3 6c da cc  |...,....J....l..|
-00003072  bb 29 dd 58 6d 0c ba 44  07 f9 b8 bc de 4a 4a 9f  |.).Xm..D.....JJ.|
-00003082  7a c1 38 94 7e 0d df 9e  a6 bd 89 6c fd eb 84 6b  |z.8.~......l...k|
-00003092  e0 fa 15 02 90 b2 c0 8a  2d 8d 1f af 97 66 f0 e9  |........-....f..|
-000030a2  3c 04 68 ac b6 5c 9d 9a  d4 c4 eb fa 8a 27 b6 17  |<.h..\.......'..|
-000030b2  ef 29 50 28 c6 fd c9 c4  d4 77 e2 00 b3 57 47 46  |.)P(.....w...WGF|
-000030c2  6f a2 04 a3 fa c3 c4 22  2b c3 c1 20 2d c9 f9 b4  |o......"+.. -...|
-000030d2  25 84 2f 1a b7 21 fc d8  c2 35 4e 4f 0f aa a1 04  |%./..!...5NO....|
-000030e2  e8 56 3d bc 12 4e 5d 86  19 1c a1 8b a7 3e 26 00  |.V=..N]......>&.|
-000030f2  80 f9 52 5c 18 60 15 1c  80 fb 4e 3e d0 55 93 c3  |..R\.`....N>.U..|
-00003102  98 0e f2 9f e6 0c f8 b3  7d 59 97 39 59 f7 14 e6  |........}Y.9Y...|
-00003112  e7 e1 7c 7a dd 3c 77 e4  70 3e 09 38 b9 7e fe 95  |..|z.<w.p>.8.~..|
-00003122  a2 19 04 d4 14 39 f0 36  d0 67 3c 00 58 d3 1c f6  |.....9.6.g<.X...|
-00003132  82 85 96 68 ea 64 21 fc  89 1f 06 d7 c3 36 9c 7d  |...h.d!......6.}|
-00003142  44 f2 cb bd 05 25 d4 ae  f5 2a 09 5e 74 a1 ef 17  |D....%...*.^t...|
-00003152
+00005913  2f ba 87 17 f3 81 b0 b4  c4 8a 85 4d dc 9c bf e6  |/..........M....|
+00005923  18 be 84 11 01 8e bc e9  f4 34 e5 c4 ff 5b 51 92  |.........4...[Q.|
+00005933  4d e9 ca 59 c8 8f c3 c0  06 25 bd fd 52 0e e3 c8  |M..Y.....%..R...|
+00005943  83 0a c6 a3 c9 94 8d 73  91 29 11 b2 4d f2 fb bf  |.......s.)..M...|
+00005953  a8 c1 35 89 d6 73 ea fe  53 93 23 d7 29 6d 8e 73  |..5..s..S.#.)m.s|
+00005963  9b 34 86 66 c4 8e 3e a8  a5 07 c7 e2 23 6d b8 d8  |.4.f..>.....#m..|
+00005973  58 6b 36 56 60 8b 40 09  8d 00 02 75 b3 1b ba 07  |Xk6V`.@....u....|
+00005983  a3 d6 f2 57 77 7a aa 30  a7 22 b3 3e d7 0a 21 76  |...Wwz.0.".>..!v|
+00005993  05 d0 17 c8 3e 84 62 f1  a1 f9 5e 7c fc 9e 11 6f  |....>.b...^|...o|
+000059a3  43 29 40 5d 27 53 42 4e  ef 3b 16 8c 75 96 f1 96  |C)@]'SBN.;..u...|
+000059b3  46 78 a2 84 6f a8 2c a5  a1 3f ad e8 a5 59 0c fc  |Fx..o.,..?...Y..|
+000059c3  31 d2 d7 52 0e ff 5e fe  6f 93 f7 bd ed b9 a4 19  |1..R..^.o.......|
+000059d3  19 59 89 27 a2 23 2b 28  e7 82 c5 52 96 bb ec 0f  |.Y.'.#+(...R....|
+000059e3  45 b9 dd 56 e4 f0 1a ec  b1 2f a2 83 15 9a cb 23  |E..V...../.....#|
+000059f3  fe 95 6a 3d 6b 9d 9a a8  f0 1d d6 d7 f1 70 c3 9f  |..j=k........p..|
+00005a03  d5 f8 f9 1a 03 f9 3b b0  e5 ec 4f 17 58 25 68 42  |......;...O.X%hB|
+00005a13
